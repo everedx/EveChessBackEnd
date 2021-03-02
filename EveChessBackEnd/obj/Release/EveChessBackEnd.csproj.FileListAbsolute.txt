@@ -1,0 +1,13 @@
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\EveChessBackEnd.dll
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\EveChessBackEnd.pdb
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\DarkRift.dll
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\DarkRift.Server.dll
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\DarkRift.pdb
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\DarkRift.xml
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\DarkRift.Server.pdb
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Release\DarkRift.Server.xml
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Release\EveChessBackEnd.csprojAssemblyReference.cache
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Release\EveChessBackEnd.csproj.CoreCompileInputs.cache
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Release\EveChessBackEnd.csproj.CopyComplete
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Release\EveChessBackEnd.dll
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Release\EveChessBackEnd.pdb
