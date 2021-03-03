@@ -14,7 +14,8 @@ namespace EveChessBackEnd
             ConnectedPlayers = 0,
             PlayerReady = 1,
             SetColor = 2,
-            MovePiece = 3
+            MovePiece = 3,
+            PieceEaten =4
         }
 
         public enum Colors

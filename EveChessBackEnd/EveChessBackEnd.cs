@@ -92,6 +92,13 @@ namespace EveChessBackEnd
                     char targetRow = reader.ReadChar();
                     SendMovementToClient(originColumn,originRow,targetColumn,targetRow,ClientManager.GetClient(ingamePlayers.Find(x=> x != e.Client.ID)).ID);
                 }
+                else if (message.Tag == (ushort)ChessEnums.MessageTags.PieceEaten)
+                {
+                    char column = reader.ReadChar();
+                    char row = reader.ReadChar();
+                    Logger.Log("Eaten: " + column + row, LogType.Info);
+                    SendEatenPieceToClient(column, row, ClientManager.GetClient(ingamePlayers.Find(x => x != e.Client.ID)).ID);
+                }
 
             }
         }
@@ -139,6 +146,21 @@ namespace EveChessBackEnd
                 messageWriter.Write(targetColumn);
                 messageWriter.Write(targetRow);
                 using (Message movementMessage = Message.Create((ushort)ChessEnums.MessageTags.MovePiece, messageWriter))
+                {
+                    ClientManager.GetClient(clientId).SendMessage(movementMessage, SendMode.Reliable);
+                }
+            }
+        }
+
+        private void SendEatenPieceToClient(char column, char row, ushort clientId)
+        {
+            using (DarkRiftWriter messageWriter = DarkRiftWriter.Create())
+            {
+
+                messageWriter.Write(column);
+                messageWriter.Write(row);
+
+                using (Message movementMessage = Message.Create((ushort)ChessEnums.MessageTags.PieceEaten, messageWriter))
                 {
                     ClientManager.GetClient(clientId).SendMessage(movementMessage, SendMode.Reliable);
                 }

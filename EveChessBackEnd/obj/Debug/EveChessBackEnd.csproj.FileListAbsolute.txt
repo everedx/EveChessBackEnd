@@ -10,4 +10,3 @@ D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveC
 D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveChessBackEnd.csproj.CopyComplete
 D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveChessBackEnd.dll
 D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveChessBackEnd.pdb
-D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveChessBackEnd.csprojAssemblyReference.cache
