@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessEnums.cs" />
+    <Compile Include="ChessTimer.cs" />
     <Compile Include="EveChessBackEnd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -17,6 +17,9 @@ namespace EveChessBackEnd
         private List<ushort> readyPlayers = new List<ushort>();
         private List<ushort> ingamePlayers = new List<ushort>();
 
+        private Dictionary<ushort, ChessEnums.Colors> playerColors = new Dictionary<ushort, ChessEnums.Colors>();
+
+        private ChessTimer timer;
 
         public ChessBackEnd(PluginLoadData pluginLoadData) : base(pluginLoadData)
         {
@@ -42,6 +45,9 @@ namespace EveChessBackEnd
 
             if (ingamePlayers.Contains(e.Client.ID))
                 ingamePlayers.Remove(e.Client.ID);
+
+            if(playerColors.ContainsKey(e.Client.ID))
+                playerColors.Remove(e.Client.ID);
         }
 
         private void SendAllPlayers()
@@ -86,11 +92,18 @@ namespace EveChessBackEnd
                 }
                 else if (message.Tag == (ushort)ChessEnums.MessageTags.MovePiece)
                 {
+
                     char originColumn = reader.ReadChar();
                     char originRow = reader.ReadChar();
                     char targetColumn = reader.ReadChar();
                     char targetRow = reader.ReadChar();
                     SendMovementToClient(originColumn,originRow,targetColumn,targetRow,ClientManager.GetClient(ingamePlayers.Find(x=> x != e.Client.ID)).ID);
+
+                    if (playerColors[e.Client.ID] == ChessEnums.Colors.White)
+                        timer.WhiteMoved();
+                    else
+                        timer.BlackMoved();
+                    
                 }
                 else if (message.Tag == (ushort)ChessEnums.MessageTags.PieceEaten)
                 {
@@ -109,22 +122,29 @@ namespace EveChessBackEnd
             Random random = new Random();
             if (random.Next(0, 1) == 0)
             {
+                timer = new ChessTimer(ClientManager.GetClient(readyPlayers[0]), ClientManager.GetClient(readyPlayers[1]));
                 AssignColorToPlayer(ChessEnums.Colors.White,readyPlayers[0]);
                 AssignColorToPlayer(ChessEnums.Colors.Black, readyPlayers[1]);
+
+                
             }
             else
             {
+                timer = new ChessTimer(ClientManager.GetClient(readyPlayers[1]), ClientManager.GetClient(readyPlayers[0]));
                 AssignColorToPlayer(ChessEnums.Colors.Black, readyPlayers[0]);
                 AssignColorToPlayer(ChessEnums.Colors.White, readyPlayers[1]);
+
             }
             ingamePlayers.Add(readyPlayers[0]);
             ingamePlayers.Add(readyPlayers[1]);
+            
             readyPlayers.Clear();
         }
 
 
         private void AssignColorToPlayer(ChessEnums.Colors color, ushort id)
         {
+            playerColors.Add(id, color);
             using (DarkRiftWriter messageWriter = DarkRiftWriter.Create())
             {
                

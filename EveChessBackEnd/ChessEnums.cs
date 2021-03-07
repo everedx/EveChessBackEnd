@@ -15,7 +15,8 @@ namespace EveChessBackEnd
             PlayerReady = 1,
             SetColor = 2,
             MovePiece = 3,
-            PieceEaten =4
+            PieceEaten =4,
+            TimerTick =5
         }
 
         public enum Colors
