@@ -97,13 +97,13 @@ namespace EveChessBackEnd
                     char originRow = reader.ReadChar();
                     char targetColumn = reader.ReadChar();
                     char targetRow = reader.ReadChar();
-                    SendMovementToClient(originColumn,originRow,targetColumn,targetRow,ClientManager.GetClient(ingamePlayers.Find(x=> x != e.Client.ID)).ID);
+                    SendMovementToClient(originColumn, originRow, targetColumn, targetRow, ClientManager.GetClient(ingamePlayers.Find(x => x != e.Client.ID)).ID);
 
                     if (playerColors[e.Client.ID] == ChessEnums.Colors.White)
                         timer.WhiteMoved();
                     else
                         timer.BlackMoved();
-                    
+
                 }
                 else if (message.Tag == (ushort)ChessEnums.MessageTags.PieceEaten)
                 {
@@ -112,6 +112,26 @@ namespace EveChessBackEnd
                     Logger.Log("Eaten: " + column + row, LogType.Info);
                     SendEatenPieceToClient(column, row, ClientManager.GetClient(ingamePlayers.Find(x => x != e.Client.ID)).ID);
                 }
+                else if (message.Tag == (ushort)ChessEnums.MessageTags.WinnerMessage)
+                {
+
+                    timer.EndTimer(reader.ReadBoolean());
+                }
+                else if (message.Tag == (ushort)ChessEnums.MessageTags.MoveReplace)
+                {
+
+                    char originColumn = reader.ReadChar();
+                    char originRow = reader.ReadChar();
+                    char targetColumn = reader.ReadChar();
+                    char targetRow = reader.ReadChar();
+                    ushort type = reader.ReadUInt16();
+                    SendMovementReplaceToClient(originColumn, originRow, targetColumn, targetRow, type,ClientManager.GetClient(ingamePlayers.Find(x => x != e.Client.ID)).ID);
+                    if (playerColors[e.Client.ID] == ChessEnums.Colors.White)
+                        timer.WhiteMoved();
+                    else
+                        timer.BlackMoved();
+                }
+
 
             }
         }
@@ -168,6 +188,24 @@ namespace EveChessBackEnd
                 using (Message movementMessage = Message.Create((ushort)ChessEnums.MessageTags.MovePiece, messageWriter))
                 {
                     ClientManager.GetClient(clientId).SendMessage(movementMessage, SendMode.Reliable);
+                }
+            }
+        }
+
+
+        private void SendMovementReplaceToClient(char originColumn, char originRow, char targetColumn, char targetRow,ushort type, ushort clientId)
+        {
+            using (DarkRiftWriter messageWriter = DarkRiftWriter.Create())
+            {
+
+                messageWriter.Write(originColumn);
+                messageWriter.Write(originRow);
+                messageWriter.Write(targetColumn);
+                messageWriter.Write(targetRow);
+                messageWriter.Write(type);
+                using (Message movementReplaceMessage = Message.Create((ushort)ChessEnums.MessageTags.MoveReplace, messageWriter))
+                {
+                    ClientManager.GetClient(clientId).SendMessage(movementReplaceMessage, SendMode.Reliable);
                 }
             }
         }

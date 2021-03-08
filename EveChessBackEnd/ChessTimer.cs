@@ -11,6 +11,7 @@ namespace EveChessBackEnd
 {
     class ChessTimer
     {
+        bool ended;
         IClient client1, client2;
 
         Timer timerWhites;
@@ -18,6 +19,7 @@ namespace EveChessBackEnd
 
         public ChessTimer(IClient client1,IClient client2)
         {
+            ended = false;
             this.client1 = client1;
             this.client2 = client2;
             timerWhites = new Timer();
@@ -59,14 +61,38 @@ namespace EveChessBackEnd
 
         public void WhiteMoved()
         {
-            timerWhites.Stop();
-            timerBlacks.Start();
+            if (!ended)
+            {
+                
+                timerWhites.Stop();
+                timerBlacks.Start();
+            }
         }
 
         public void BlackMoved()
         {
+            if (!ended)
+            {
+                timerBlacks.Stop();
+                timerWhites.Start();
+            }
+        }
+
+        public void EndTimer(bool winnerColor)
+        {
+            ended = true;
             timerBlacks.Stop();
-            timerWhites.Start();
+            timerWhites.Stop();
+            using (DarkRiftWriter messageWriter = DarkRiftWriter.Create())
+            {
+                messageWriter.Write(winnerColor);
+                using (Message winnerMessage = Message.Create((ushort)ChessEnums.MessageTags.WinnerMessage, messageWriter))
+                {
+                    client1.SendMessage(winnerMessage, SendMode.Reliable);
+                    client2.SendMessage(winnerMessage, SendMode.Reliable);
+                }
+            }
+
         }
     }
 }
