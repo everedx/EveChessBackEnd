@@ -11,3 +11,7 @@ D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveC
 D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveChessBackEnd.dll
 D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveChessBackEnd.pdb
 D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\obj\Debug\EveChessBackEnd.csprojAssemblyReference.cache
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Debug\Microsoft.Playfab.Gaming.GSDK.CSharp.dll
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Debug\Newtonsoft.Json.dll
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Debug\Microsoft.Playfab.Gaming.GSDK.CSharp.pdb
+D:\Unity\Projects\EveChessBackEnd\EveChessBackEnd\EveChessBackEnd\bin\Debug\Newtonsoft.Json.xml

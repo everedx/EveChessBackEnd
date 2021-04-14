@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Remoting;
+using Microsoft.Playfab.Gaming.GSDK.CSharp;
 
 namespace EveChessBackEnd
 {
@@ -23,12 +24,38 @@ namespace EveChessBackEnd
 
         public ChessBackEnd(PluginLoadData pluginLoadData) : base(pluginLoadData)
         {
+            
             ClientManager.ClientConnected += ClientConnected;
             ClientManager.ClientDisconnected += ClientDisconnected;
-            
+
+            GameserverSDK.RegisterShutdownCallback(OnShutdown);
+            GameserverSDK.RegisterHealthCallback(OnHealthCheck);
+
+            // Connect to PlayFab agent
+            GameserverSDK.Start();
+            if (GameserverSDK.ReadyForPlayers())
+            {
+                // returns true on allocation call, player about to connect
+            }
+            else
+            {
+                // returns false when server is being terminated
+            }
+
+          
+
         }
 
+        void OnShutdown()
+        {
+            Environment.Exit(1);
 
+        }
+
+        bool OnHealthCheck()
+        {
+            return true;
+        }
         void ClientConnected(object sender, ClientConnectedEventArgs e)
         {
             SendAllPlayers();
